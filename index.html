@@ -72,8 +72,10 @@
   .leaflet-control-attribution { font-size: 10px; }
 
   @media (max-width: 560px) {
-    .options { grid-template-columns: 1fr; }
-    .opt { min-height: 44px; padding: 9px 10px; font-size: 14px; }
+    .options { grid-template-columns: 1fr 1fr; gap: 6px; }
+    .opt { min-height: 48px; padding: 7px 8px; font-size: 13px; line-height: 1.2; gap: 6px; }
+    .opt kbd { display: none; }
+    .panel { bottom: 10px; padding: 10px; }
     .title small { display: none; }
     .stats { gap: 10px; }
     .stat b { font-size: 17px; }
@@ -150,10 +152,8 @@ const STREETS = RAW.map(([name, ways]) => {
 const PLAYABLE = STREETS.filter(s => s.len > 90 && s.core.length > 2 && !/^acceso/i.test(s.name));
 
 // ---------- Mapa ----------
-const map = L.map('map', { zoomControl: true, preferCanvas: true, minZoom: 13, maxZoom: 20 })
+const map = L.map('map', { zoomControl: false, preferCanvas: true, minZoom: 13, maxZoom: 20 })
   .setView([42.4627, -2.4449], 15);
-map.zoomControl.setPosition('topright');
-map.getContainer().querySelector('.leaflet-top.leaflet-right').style.marginTop = '90px';
 // lyrs=s: satélite de Google SIN etiquetas (lyrs=y mostraría los nombres de las calles)
 L.tileLayer('https://mt{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
   subdomains: ['0', '1', '2', '3'],
